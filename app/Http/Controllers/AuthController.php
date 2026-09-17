@@ -25,7 +25,7 @@ class AuthController extends Controller
             } elseif ($role == 'doctor' || $role == 'dokter') {
                 return redirect('/doctor/dashboard');
             } else {
-                return redirect('/patients'); // Default Resepsionis
+                return redirect('/resepsionis/dashboard');
             }
         }
 

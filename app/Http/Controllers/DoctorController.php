@@ -37,4 +37,17 @@ class DoctorController extends Controller
 
         return view('doctor.history', compact('appointments', 'doctor'));
     }
+
+    public function profile()
+    {
+        // 1. Ambil data dokter berdasarkan user yang sedang login
+        $doctor = Doctor::with('user')->where('user_id', Auth::id())->first();
+        
+        // 2. Hitung total pasien yang sudah selesai diperiksa oleh dokter ini
+        $totalPatients = Appointment::where('doctor_id', $doctor->id)
+                                    ->where('status', 'completed')
+                                    ->count();
+                                    
+        return view('doctor.profile', compact('doctor', 'totalPatients'));
+    }
 }

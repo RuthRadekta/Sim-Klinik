@@ -21,42 +21,71 @@
         <div class="sidebar p-3" style="width: 250px;">
             <h4 class="text-center mb-4"><i class="bi bi-hospital"></i> SIM Klinik</h4>
             
-            <!-- Menu Admin -->
-            <small class="text-muted text-uppercase">Admin</small>
-            <a href="/admin/dashboard"><i class="bi bi-speedometer2"></i> Monitoring</a>
-            <a href="/admin/employees"><i class="bi bi-people"></i> Data Karyawan</a>
-            <a href="/admin/doctors"><i class="bi bi-heart-pulse"></i> Data Dokter</a>
-            <hr class="border-secondary">
-
-            <!-- Menu Dokter -->
-            <small class="text-muted text-uppercase">Dokter</small>
-            <a href="/doctor/dashboard"><i class="bi bi-person-lines-fill"></i> Antrean Saya</a>
-            <a href="/doctor/history"><i class="bi bi-clock-history"></i> Riwayat Pasien</a>
-            <a href="/doctor/profile"><i class="bi bi-person-badge"></i> Profil</a>
-            <hr class="border-secondary">
-
-            <!-- Menu Resepsionis -->
-            <small class="text-muted text-uppercase">Resepsionis</small>
-            <a href="/appointments/create"><i class="bi bi-calendar-plus"></i> Buat Appointment</a>
-            <a href="/patients"><i class="bi bi-file-person"></i> Daftar Pasien</a>
-            <a href="/medicines"><i class="bi bi-capsule"></i> Daftar Obat</a>
-            <a href="/rooms"><i class="bi bi-door-open"></i> Daftar Ruangan</a>
-            <a href="/cashier"><i class="bi bi-cash-coin"></i> Kasir & Antrean</a>
-            
-            <hr class="border-secondary">
-            <a href="/" class="text-danger"><i class="bi bi-box-arrow-left"></i> Logout</a>
+            @if(Auth::check())
+                <!-- MENU KHUSUS ADMIN -->
+                @if(Auth::user()->role == 'admin')
+                    <small class="text-muted text-uppercase">Admin</small>
+                    <a href="/admin/dashboard"><i class="bi bi-speedometer2"></i> Monitoring</a>
+                    <a href="/admin/employees"><i class="bi bi-people"></i> Data Karyawan</a>
+                    <a href="/admin/doctors"><i class="bi bi-heart-pulse"></i> Data Dokter</a>
+                
+                <!-- MENU KHUSUS DOKTER -->
+                @elseif(Auth::user()->role == 'doctor' || Auth::user()->role == 'dokter')
+                    <small class="text-muted text-uppercase">Dokter</small>
+                    <a href="/doctor/dashboard"><i class="bi bi-person-lines-fill"></i> Antrean Saya</a>
+                    <a href="/doctor/history"><i class="bi bi-clock-history"></i> Riwayat Pasien</a>
+                    <a href="/doctor/profile"><i class="bi bi-person-badge"></i> Profil</a>
+                
+                <!-- MENU KHUSUS RESEPSIONIS -->
+                @else
+                    <small class="text-muted text-uppercase">Resepsionis</small>
+                    <a href="/resepsionis/dashboard"><i class="bi bi-house-door"></i> Dashboard Utama</a>
+                    <a href="/appointments/create"><i class="bi bi-calendar-plus"></i> Buat Appointment</a>
+                    <a href="/patients"><i class="bi bi-file-person"></i> Daftar Pasien</a>
+                    <a href="/medicines"><i class="bi bi-capsule"></i> Daftar Obat</a>
+                    <a href="/rooms"><i class="bi bi-door-open"></i> Daftar Ruangan</a>
+                    <a href="/cashier"><i class="bi bi-cash-coin"></i> Kasir & Antrean</a>
+                @endif
+                
+                <hr class="border-secondary">
+                <a href="/logout" class="text-danger"><i class="bi bi-box-arrow-left"></i> Logout</a>
+            @endif
         </div>
 
         <!-- Konten Utama -->
         <div class="content flex-grow-1">
-            <div class="bg-white p-3 mb-4 shadow-sm rounded d-flex justify-content-between">
-                <h5 class="mb-0">@yield('page_title')</h5>
-                <span><i class="bi bi-person-circle"></i> User Aktif</span>
+            <div class="content flex-grow-1">
+                <div class="bg-white p-3 mb-4 shadow-sm rounded d-flex justify-content-between">
+                    <h5 class="mb-0">@yield('page_title')</h5>
+                    <span><i class="bi bi-person-circle"></i> User Aktif</span>
+                </div>
+                
+                <!-- TAMBAHKAN KODE FLASH MESSAGE DI SINI -->
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <!-- Menangkap Error Validasi Form -->
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i> <strong>Terdapat Kesalahan:</strong>
+                        <ul class="mb-0 mt-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <!-- ==================================== -->
+                
+                @yield('content') 
             </div>
-            
-            <!-- Di sinilah konten dari file view lain akan dimasukkan -->
-            @yield('content') 
-        </div>
-    </div>
+
+<!-- Pastikan Anda memanggil script Javascript Bootstrap di bagian bawah (sebelum </body>) agar tombol silang (X) pada alert bisa diklik -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
