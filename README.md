@@ -1,3 +1,25 @@
+## SIM-KLINIK (v1)
+
+## 1. Arsitektur & Teknologi:
+* **Backend:** Framework Laravel (PHP) dengan implementasi pola desain *Model-View-Controller* (MVC).
+* **Frontend:** Blade Templating Engine yang dipadukan dengan Bootstrap 5 untuk antarmuka yang responsif.
+* **Database:** MySQL dengan rancangan relasi antar-tabel (One-to-Many, BelongsTo) dan pemanfaatan *Eager Loading* untuk mengoptimalkan performa *query* data yang berlapis.
+
+## 2. Kontrol Hak Akses (RBAC)
+* **Admin:** Memegang kendali penuh atas data master personil (manajemen karyawan dan pembuatan akun dokter otomatis), serta dasbor pemantauan analitik klinik.
+* **Dokter:** Memiliki ruang kerja terisolasi untuk mengelola antrean mandiri, mencatat Rekam Medis Elektronik (EHR) berdampingan dengan profil pasien, dan melacak riwayat medis.
+* **Resepsionis:** Menjadi pusat operasional harian yang mengontrol siklus pendaftaran pasien, manajemen ketersediaan ruangan, pemantauan status stok obat, dan eksekusi transaksi kasir.
+
+## 3. Logika Bisnis & Otomatisasi Terintegrasi
+* **Siklus Pasien:** Alur data yang tersinkronisasi tanpa putus, dimulai dari penentuan nomor antrean, proses diagnosis di ruang periksa, hingga bermuara di antrean pembayaran.
+* **Inventaris Otomatis:** Tindakan dokter yang memberikan resep obat akan secara otomatis memicu pengurangan stok fisik di modul farmasi saat rekam medis disimpan.
+* **Kalkulasi Finansial:** Modul kasir secara dinamis menarik dan menjumlahkan variabel tarif jasa dokter dengan kalkulasi harga satuan obat (kuantitas × harga) menjadi *Grand Total* tagihan akhir.
+
+## 4. Fitur Standar Industri
+* **Integritas & Keamanan Data:** Perlindungan formulir menggunakan Token CSRF, pengamanan *Mass Assignment* pada model, dan validasi *input* ketat dengan *error handling* global.
+* **Pengalaman Pengguna (UX):** Implementasi *Flash Message* berbasis *session* yang memberikan umpan balik visual secara instan setiap kali aksi CRUD berhasil dieksekusi.
+* **Pelaporan (Reporting):** Fasilitas untuk mengekspor rekapan data ke dalam format CSV (*spreadsheet*), pencarian data (*search bar*), serta pembuatan dokumen *Invoice* berformat PDF siap cetak.
+
 <<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
@@ -61,3 +83,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 =======
 # Sim-Klinik
 >>>>>>> 9acb64350416f690df85d4d7a139b77d2272aa8b
+
+# Information:
+1. Running with Laravel HERD (PHP 8.2)
+2. XAMPP (MySQL only) + DBeaver for visualization
+3. Folder name sim-klinik
+4. Login: admin123@klinik.com (as admin); all password is password123
