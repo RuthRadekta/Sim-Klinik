@@ -24,4 +24,14 @@ class Appointment extends Model
     {
         return $this->belongsTo(Doctor::class);
     }
+
+    // Relasi 1 Pendaftaran punya 1 Rekam Medis
+    public function medicalRecord() {
+        return $this->hasOne(MedicalRecord::class);
+    }
+    
+    // Relasi 1 Pendaftaran punya 1 Transaksi
+    public function transaction() {
+        return $this->hasOne(Transaction::class);
+    }
 }

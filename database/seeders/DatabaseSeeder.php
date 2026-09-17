@@ -14,34 +14,34 @@ class DatabaseSeeder extends Seeder
     {
         // 1. Buat Akun Resepsionis/Admin
         User::create([
-            'name' => 'Admin Klinik',
-            'email' => 'admin@klinik.com',
+            'name' => 'Admin',
+            'email' => 'admin123@klinik.com',
             'password' => Hash::make('password123'),
-            // 'role' => 'admin' // Hapus tanda komentar jika Anda membuat kolom role di tabel users
+            'role' => 'admin' // Hapus tanda komentar jika Anda membuat kolom role di tabel users
         ]);
 
-        // 2. Buat Akun Dokter
-        $userDokter = User::create([
-            'name' => 'Dr. Andi (Umum)',
-            'email' => 'dokter@klinik.com',
-            'password' => Hash::make('password123'),
-            // 'role' => 'doctor' // Hapus tanda komentar jika Anda membuat kolom role
-        ]);
+        // // 2. Buat Akun Dokter
+        // $userDokter = User::create([
+        //     'name' => 'Dr. Andi (Umum)',
+        //     'email' => 'dokter@klinik.com',
+        //     'password' => Hash::make('password123'),
+        //     // 'role' => 'doctor' // Hapus tanda komentar jika Anda membuat kolom role
+        // ]);
 
-        // 3. Masukkan profil spesifik dokter yang terhubung ke akun di atas
-        Doctor::create([
-            'user_id' => $userDokter->id,
-            'specialization' => 'Dokter Umum',
-            'fee' => 100000,
-        ]);
+        // // 3. Masukkan profil spesifik dokter yang terhubung ke akun di atas
+        // Doctor::create([
+        //     'user_id' => $userDokter->id,
+        //     'specialization' => 'Dokter Umum',
+        //     'fee' => 100000,
+        // ]);
 
         // 4. Buat Data Pasien
         Patient::create([
-            'nik' => '3372010101010001',
-            'name' => 'Budi Santoso',
-            'dob' => '1990-05-20',
-            'address' => 'Jl. Slamet Riyadi, Surakarta',
-            'allergy_history' => 'Amoxicillin, Kacang'
+            'nik' => '3372010101010003',
+            'name' => 'Arum Dani',
+            'dob' => '1998-09-23',
+            'address' => 'Jl. Plesungan, Surakarta',
+            'allergy_history' => 'Serbuk, debu, makanan laut',
         ]);
     }
 }
