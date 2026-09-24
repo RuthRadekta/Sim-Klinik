@@ -1,20 +1,21 @@
 ## SIM-KLINIK (v1)
 
 ## 1. Arsitektur & Teknologi:
-* **Backend:** Framework Laravel (PHP) dengan implementasi pola desain *Model-View-Controller* (MVC).
-* **Frontend:** Blade Templating Engine yang dipadukan dengan Bootstrap 5 untuk antarmuka yang responsif.
-* **Database:** MySQL dengan rancangan relasi antar-tabel (One-to-Many, BelongsTo) dan pemanfaatan *Eager Loading* untuk mengoptimalkan performa *query* data yang berlapis.
+* **Backend**: Framework Laravel (PHP) pola desain MVC.
+* **Frontend**: Blade, Bootstrap.
+* **Database**: MySQL yang dihosting dengan Supabase
+* **Deployment**: Railway
 
 ## 2. Kontrol Hak Akses (RBAC)
-* **Admin:** Memegang kendali penuh atas data master personil (manajemen karyawan dan pembuatan akun dokter otomatis), serta dasbor pemantauan analitik klinik.
-* **Dokter:** Memiliki ruang kerja terisolasi untuk mengelola antrean mandiri, mencatat Rekam Medis Elektronik (EHR) berdampingan dengan profil pasien, dan melacak riwayat medis.
+* **Admin:** Memegang kendali penuh, seperti manajemen karyawan dan pembuatan akun dokter otomatis, serta dasbor pemantauan analitik klinik.
+* **Dokter:** Memiliki dashboard mengelola antrean mandiri, mencatat Rekam Medis Elektronik berdampingan dengan profil pasien, dan melacak riwayat medis.
 * **Resepsionis:** Menjadi pusat operasional harian yang mengontrol siklus pendaftaran pasien, manajemen ketersediaan ruangan, pemantauan status stok obat, dan eksekusi transaksi kasir.
 
 ## 3. Fitur
-* **Siklus Pasien:** Alur data yang tersinkronisasi tanpa putus, dimulai dari penentuan nomor antrean, proses diagnosis di ruang periksa, hingga bermuara di antrean pembayaran.
-* **Inventaris Otomatis:** Tindakan dokter yang memberikan resep obat akan secara otomatis memicu pengurangan stok fisik di modul farmasi saat rekam medis disimpan.
-* **Kalkulasi Finansial:** Modul kasir secara dinamis menarik dan menjumlahkan variabel tarif jasa dokter dengan kalkulasi harga satuan obat (kuantitas × harga) menjadi *Grand Total* tagihan akhir.
-* **Pelaporan (Reporting):** Fasilitas untuk mengekspor rekapan data ke dalam format CSV (*spreadsheet*), pencarian data (*search bar*), serta pembuatan dokumen *Invoice* berformat PDF siap cetak.
+* **Siklus Pasien:** Alur data yang tersinkronisasi, dimulai dari penentuan nomor antrean, proses diagnosis di ruang periksa, hingga antrean pembayaran.
+* **Inventaris Otomatis:** Inventaris yang otomatis terupdate saat dilakukan perubahan data.
+* **Kalkulasi Finansial:** Modul kasir untuk tarif jasa dokter dengan kalkulasi harga satuan obat (kuantitas × harga) menjadi *Grand Total* tagihan akhir.
+* **Pelaporan (Reporting):** Fitur untuk mengekspor rekapan data ke dalam format CSV (*spreadsheet*), pencarian data (*search bar*), serta pembuatan dokumen *Invoice* berformat PDF siap cetak.
 
 <<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
