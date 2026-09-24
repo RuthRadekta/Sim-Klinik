@@ -10,14 +10,10 @@
 * **Dokter:** Memiliki ruang kerja terisolasi untuk mengelola antrean mandiri, mencatat Rekam Medis Elektronik (EHR) berdampingan dengan profil pasien, dan melacak riwayat medis.
 * **Resepsionis:** Menjadi pusat operasional harian yang mengontrol siklus pendaftaran pasien, manajemen ketersediaan ruangan, pemantauan status stok obat, dan eksekusi transaksi kasir.
 
-## 3. Logika Bisnis & Otomatisasi Terintegrasi
+## 3. Fitur
 * **Siklus Pasien:** Alur data yang tersinkronisasi tanpa putus, dimulai dari penentuan nomor antrean, proses diagnosis di ruang periksa, hingga bermuara di antrean pembayaran.
 * **Inventaris Otomatis:** Tindakan dokter yang memberikan resep obat akan secara otomatis memicu pengurangan stok fisik di modul farmasi saat rekam medis disimpan.
 * **Kalkulasi Finansial:** Modul kasir secara dinamis menarik dan menjumlahkan variabel tarif jasa dokter dengan kalkulasi harga satuan obat (kuantitas × harga) menjadi *Grand Total* tagihan akhir.
-
-## 4. Fitur Standar Industri
-* **Integritas & Keamanan Data:** Perlindungan formulir menggunakan Token CSRF, pengamanan *Mass Assignment* pada model, dan validasi *input* ketat dengan *error handling* global.
-* **Pengalaman Pengguna (UX):** Implementasi *Flash Message* berbasis *session* yang memberikan umpan balik visual secara instan setiap kali aksi CRUD berhasil dieksekusi.
 * **Pelaporan (Reporting):** Fasilitas untuk mengekspor rekapan data ke dalam format CSV (*spreadsheet*), pencarian data (*search bar*), serta pembuatan dokumen *Invoice* berformat PDF siap cetak.
 
 <<<<<<< HEAD
