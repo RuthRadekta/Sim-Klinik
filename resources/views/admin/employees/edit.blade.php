@@ -19,6 +19,7 @@
                     <option value="Perawat" {{ $employee->position == 'Perawat' ? 'selected' : '' }}>Perawat</option>
                     <option value="Apoteker" {{ $employee->position == 'Apoteker' ? 'selected' : '' }}>Apoteker</option>
                     <option value="Cleaning Service" {{ $employee->position == 'Cleaning Service' ? 'selected' : '' }}>Cleaning Service</option>
+                    <option value="Resepsionis" {{ $employee->position == 'Resepsionis' ? 'selected' : '' }}>Resepsionis</option>
                 </select>
             </div>
             <div class="mb-3">

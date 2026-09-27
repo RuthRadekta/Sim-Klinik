@@ -61,6 +61,17 @@
                             </tr>
                             @endforeach
                         @endif
+
+                        @if($roomFee > 0)
+                            <tr>
+                                <td>
+                                    <strong>Biaya Rawat Inap (Kamar)</strong><br>
+                                    <small class="text-muted">Kalkulasi otomatis dari sistem ruangan</small>
+                                </td>
+                                <td class="text-center">1</td>
+                                <td class="text-end">Rp {{ number_format($roomFee, 0, ',', '.') }}</td>
+                            </tr>
+                        @endif
                     </tbody>
                     <tfoot>
                         <tr>

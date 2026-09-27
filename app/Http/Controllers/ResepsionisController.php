@@ -10,8 +10,10 @@ class ResepsionisController extends Controller
 {
     public function dashboard()
     {
-        $todayAppointments = Appointment::whereDate('date', Carbon::today())->count();
-        // Cari pasien yang sudah selesai diperiksa tapi belum bayar
+        $todayAppointments = Appointment::whereDate('date', Carbon::today())
+                                        ->where('status', 'pending')
+                                        ->count();
+
         $pendingPayments = Appointment::where('status', 'completed')->whereDoesntHave('transaction')->count();
         $availableRooms = Room::where('status', 'Tersedia')->count();
 

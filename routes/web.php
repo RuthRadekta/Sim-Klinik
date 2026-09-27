@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminDoctorController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\ResepsionisController;
+use App\Models\Appointment;
 
 // Route bawaan Laravel
 Route::get('/', function () {
@@ -32,6 +33,10 @@ Route::get('/patients/export', [PatientController::class, 'export']);
 // Routes untuk menambahkan appointment pasien - dokter
 Route::get('/appointments/create', [AppointmentController::class, 'create']);
 Route::post('/appointments', [AppointmentController::class, 'store']);
+Route::get('/appointments', [AppointmentController::class, 'index']);
+Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit']);
+Route::put('/appointments/{id}', [AppointmentController::class, 'update']);
+Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
 
 // Routes untuk resepsionis
 Route::get('/resepsionis/dashboard', [ResepsionisController::class, 'dashboard']);
@@ -48,6 +53,7 @@ Route::get('/doctors/export', [AdminDoctorController::class, 'export']);
 Route::get('/cashier', [TransactionController::class, 'index']);
 Route::get('/cashier/invoice/{id}', [TransactionController::class, 'invoice']);
 Route::post('/cashier/pay/{id}', [TransactionController::class, 'pay']);
+Route::get('/cashier/invoice/{id}/pdf', [TransactionController::class, 'downloadPdf']);
 
 // Routes untuk autentikasi
 Route::get('/', function () { return view('auth.login'); })->name('login');
@@ -81,6 +87,10 @@ Route::get('/rooms/{id}/edit', [RoomController::class, 'edit']);
 Route::put('/rooms/{id}', [RoomController::class, 'update']);
 Route::delete('/rooms/{id}', [RoomController::class, 'destroy']);
 Route::get('/rooms/export', [RoomController::class, 'export']);
+Route::get('/rooms/{id}', [RoomController::class, 'show']);
+Route::post('/beds/{id}/book', [RoomController::class, 'bookBed']);
+Route::post('/beds/{id}/checkout', [RoomController::class, 'checkoutBed']);
+Route::delete('/beds/{id}', [RoomController::class, 'destroyBed']);
 
 // Routes untuk manajemen obat
 Route::get('/medicines', [MedicineController::class, 'index']);

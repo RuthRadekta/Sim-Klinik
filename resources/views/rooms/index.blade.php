@@ -1,63 +1,58 @@
 @extends('layouts.app')
-@section('title', 'Daftar Ruangan')
-@section('page_title', 'Manajemen Ruangan Klinik')
-
 @section('content')
 <div class="card shadow-sm border-0">
     <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-        <h6 class="mb-0 fw-bold">Data Ruangan</h6>
+        <h6 class="mb-0 fw-bold">Daftar Ruangan & Kamar</h6>
         <div class="d-flex gap-2">
-            <!-- Search Bar -->
+            <!-- Form Pencarian -->
             <form action="/rooms" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control form-control-sm me-2" placeholder="Cari nama..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control form-control-sm me-2" placeholder="Cari ruang / pasien..." value="{{ request('search') }}">
                 <button type="submit" class="btn btn-sm btn-secondary"><i class="bi bi-search"></i></button>
             </form>
             
-            <!-- Tombol Export & Tambah -->
-            <a href="/rooms/export" class="btn btn-sm btn-success"><i class="bi bi-file-earmark-excel"></i> Export</a>
-            <a href="/rooms/create" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> Tambah</a>
+            @if(Auth::user()->role == 'admin')
+                <a href="/rooms/create" class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> Tambah Ruangan</a>
+            @endif
         </div>
     </div>
     <div class="card-body p-0">
-        <table class="table table-hover table-striped mb-0">
+        <table class="table table-hover mb-0">
             <thead class="table-light">
                 <tr>
-                    <th>Nama Ruangan</th>
-                    <th>Tipe</th>
-                    <th>Kapasitas</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
+                    <th>Nama Ruangan</th><th>Tipe</th><th>Kapasitas</th><th>Harga / Hari</th><th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($rooms as $room)
+                @foreach ($rooms as $room)
                 <tr>
                     <td class="fw-bold">{{ $room->name }}</td>
                     <td>{{ $room->type }}</td>
-                    <td>{{ $room->capacity }} Bed</td>
                     <td>
-                        @if($room->status == 'Tersedia')
-                            <span class="badge bg-success">{{ $room->status }}</span>
-                        @elseif($room->status == 'Terisi')
-                            <span class="badge bg-warning text-dark">{{ $room->status }}</span>
-                        @else
-                            <span class="badge bg-danger">{{ $room->status }}</span>
+                        {{ $room->capacity }} Bed
+                        <!-- Jika sedang mencari, tampilkan info pasien yang nyangkut di kamar ini -->
+                        @if(request('search'))
+                            <br>
+                            @foreach($room->beds as $bed)
+                                @if($bed->patient && stripos($bed->patient->name, request('search')) !== false)
+                                    <span class="badge bg-danger mt-1 text-wrap text-start">
+                                        <i class="bi bi-person-fill"></i> {{ $bed->patient->name }}<br>
+                                        <small>(di {{ $bed->name }})</small>
+                                    </span>
+                                @endif
+                            @endforeach
                         @endif
                     </td>
+                    <td>Rp {{ number_format($room->price, 0, ',', '.') }}</td>
                     <td>
-                        <a href="/rooms/{{ $room->id }}/edit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></a>
-                        <form action="/rooms/{{ $room->id }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus ruangan ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                        </form>
+                        <!-- Semua Role bisa klik tombol CEK BED -->
+                        <a href="/rooms/{{ $room->id }}" class="btn btn-sm btn-info text-white"><i class="bi bi-grid"></i> Cek Ketersediaan Kamar</a>
+                        
+                        @if(Auth::user()->role == 'admin')
+                            <a href="/rooms/{{ $room->id }}/edit" class="btn btn-sm btn-outline-secondary ms-1"><i class="bi bi-pencil"></i></a>
+                        @endif
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="5" class="text-center py-4 text-muted">Belum ada data ruangan.</td>
-                </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>

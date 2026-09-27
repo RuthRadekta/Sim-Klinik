@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <th class="text-secondary">Riwayat Alergi</th>
-                <td>: 
+                <td>:
                     @if($patient->allergy_history)
                         <span class="text-danger fw-bold">{{ $patient->allergy_history }}</span>
                     @else

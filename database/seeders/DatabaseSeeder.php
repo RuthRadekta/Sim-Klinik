@@ -12,38 +12,38 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        Patient::factory(30)->create();
+        //Patient::factory(30)->create();
         
         // 1. Buat Akun Resepsionis/Admin
-        // User::create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@klinik.com',
-        //     'password' => Hash::make('password123'),
-        //     'role' => 'admin' // Hapus tanda komentar jika Anda membuat kolom role di tabel users
-        // ]);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@klinik.com',
+            'password' => Hash::make('password123'),
+            'role' => 'admin' // Hapus tanda komentar jika Anda membuat kolom role di tabel users
+        ]);
 
-        // // 2. Buat Akun Dokter
-        // $userDokter = User::create([
-        //     'name' => 'Dr. Andi (Umum)',
-        //     'email' => 'dokter@klinik.com',
-        //     'password' => Hash::make('password123'),
-        //     'role' => 'doctor' // Hapus tanda komentar jika Anda membuat kolom role
-        // ]);
+        // 2. Buat Akun Dokter
+        $userDokter = User::create([
+            'name' => 'Dr. Andi (Umum)',
+            'email' => 'dokter@klinik.com',
+            'password' => Hash::make('password123'),
+            'role' => 'doctor' // Hapus tanda komentar jika Anda membuat kolom role
+        ]);
 
-        // // 3. Masukkan profil spesifik dokter yang terhubung ke akun di atas
-        // Doctor::create([
-        //     'user_id' => $userDokter->id,
-        //     'specialization' => 'Dokter Umum',
-        //     'fee' => 100000,
-        // ]);
+        // 3. Masukkan profil spesifik dokter yang terhubung ke akun di atas
+        Doctor::create([
+            'user_id' => $userDokter->id,
+            'specialization' => 'Dokter Umum',
+            'fee' => 100000,
+        ]);
 
-        // // 4. Buat Data Pasien
-        // Patient::create([
-        //     'nik' => '3372010101010001',
-        //     'name' => 'Arum Dani',
-        //     'dob' => '1998-09-23',
-        //     'address' => 'Jl. Plesungan, Surakarta',
-        //     'allergy_history' => 'Serbuk, debu, makanan laut',
-        // ]);
+        // 4. Buat Data Pasien
+        Patient::create([
+            'nik' => '3372010101010001',
+            'name' => 'Arum Dani',
+            'dob' => '1998-09-23',
+            'address' => 'Jl. Plesungan, Surakarta',
+            'allergy_history' => 'Serbuk, debu, makanan laut',
+        ]);
     }
 }

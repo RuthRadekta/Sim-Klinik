@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Contoh: Poli Umum, Kamar Melati 01
-            $table->string('type'); // Contoh: Rawat Inap, UGD, Poli
-            $table->integer('capacity')->default(1); // Kapasitas bed/pasien
+            $table->string('name');
+            $table->string('type');
+            $table->integer('capacity')->default(1);
+            $table->integer('price')->default(0);
             $table->enum('status', ['Tersedia', 'Terisi', 'Perawatan'])->default('Tersedia');
             $table->timestamps();
         });

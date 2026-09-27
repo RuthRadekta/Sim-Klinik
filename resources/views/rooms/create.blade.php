@@ -8,7 +8,7 @@
         <form action="/rooms" method="POST">
             @csrf
             <div class="mb-3">
-                <label>Nama Ruangan (Contoh: Kamar Melati 01)</label>
+                <label>Nama Ruangan (Contoh: Kamar Mawar)</label>
                 <input type="text" name="name" class="form-control" required>
             </div>
             <div class="mb-3">
@@ -23,6 +23,10 @@
             <div class="mb-3">
                 <label>Kapasitas (Jumlah Bed)</label>
                 <input type="number" name="capacity" class="form-control" value="1" min="1" required>
+            </div>
+            <div class="mb-3">
+                <label>Harga</label>
+                <input type="number" name="price" class="form-control" placeholder="50000" required>
             </div>
             <div class="mb-4">
                 <label>Status</label>

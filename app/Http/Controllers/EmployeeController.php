@@ -23,10 +23,17 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         // Validasi input
-        $request->validate([
-            'name' => 'required',
-            'position' => 'required'
-        ]);
+        if ($request->position == 'Resepsionis') {
+            $request->validate([
+                'name' => 'required',
+                'position' => 'required',
+                'email' => 'required|email|unique:users,email',
+            ], [
+                'email.unique' => 'Email resepsionis ini sudah digunakan. Gunakan email lain.',
+            ]);
+        } else {
+            $request->validate(['name' => 'required', 'position' => 'required']);
+        }
         
         // 1. PASTIKAN MASUK KE TABEL EMPLOYEES DULU
         Employee::create([

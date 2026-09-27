@@ -25,6 +25,10 @@
                 <label>Kapasitas (Jumlah Bed)</label>
                 <input type="number" name="capacity" class="form-control" value="{{ $room->capacity }}" min="1" required>
             </div>
+            <div class="mb-3">
+                <label>Harga per Malam (Rp)</label>
+                <input type="number" name="price" class="form-control" value="{{ $room->price }}" required>
+            </div>
             <div class="mb-4">
                 <label>Status</label>
                 <select name="status" class="form-control" required>

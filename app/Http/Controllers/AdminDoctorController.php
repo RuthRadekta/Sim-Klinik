@@ -50,6 +50,17 @@ class AdminDoctorController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'specialization' => 'required',
+            'fee' => 'required|integer',
+        ], [
+            'email.unique' => 'Email ini sudah terdaftar di sistem. Silakan gunakan email lain.',
+        ]);
+
         // 1. Buat Akun User Dulu (untuk login)
         $user = User::create([
             'name' => $request->name,

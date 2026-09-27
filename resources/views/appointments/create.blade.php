@@ -15,27 +15,25 @@
                     
                     <!-- Pilihan Pasien -->
                     <div class="mb-4">
-                        <label class="form-label fw-bold">1. Pilih Pasien Terdaftar</label>
-                        <select name="patient_id" class="form-select form-select-lg" required>
-                            <option value="">-- Pilih Pasien --</option>
+                        <label class="form-label fw-bold">1. Cari Pasien Terdaftar</label>
+                        <select name="patient_id" class="form-select select2" required> <!-- Tambahkan class select2 -->
+                            <option value="">-- Ketik Nama atau NIK Pasien --</option>
                             @foreach($patients as $patient)
                                 <option value="{{ $patient->id }}">{{ $patient->nik }} - {{ $patient->name }}</option>
                             @endforeach
                         </select>
-                        <div class="form-text"><i class="bi bi-info-circle"></i> Jika nama pasien belum ada, silakan tambahkan dulu melalui menu <strong>Daftar Pasien</strong>.</div>
                     </div>
 
                     <!-- Pilihan Dokter -->
                     <div class="mb-4">
                         <label class="form-label fw-bold">2. Pilih Dokter & Spesialisasi</label>
-                        <select name="doctor_id" class="form-select form-select-lg" required>
-                            <option value="">-- Pilih Dokter --</option>
+                        <select name="doctor_id" class="form-select select2" required> <!-- Tambahkan class select2 -->
+                            <option value="">-- Ketik Nama Dokter --</option>
                             @foreach($doctors as $doctor)
                                 <option value="{{ $doctor->id }}">{{ $doctor->user->name }} ({{ $doctor->specialization }})</option>
                             @endforeach
                         </select>
                     </div>
-
                     <!-- Pemilihan Tanggal -->
                     <div class="mb-4">
                         <label class="form-label fw-bold">3. Tanggal Pemeriksaan</label>

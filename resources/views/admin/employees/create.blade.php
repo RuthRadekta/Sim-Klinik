@@ -17,7 +17,7 @@
                 <select name="position" class="form-select" id="positionSelect" required>
                     <option value="Perawat">Perawat</option>
                     <option value="Apoteker">Apoteker</option>
-                    <option value="Resepsionis">Resepsionis</option> <!-- Tambahan opsi Resepsionis -->
+                    <option value="Resepsionis">Resepsionis</option>
                     <option value="Cleaning Service">Cleaning Service</option>
                 </select>
             </div>
